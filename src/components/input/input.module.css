@@ -1,0 +1,27 @@
+.input {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  height: 60px;
+  max-width: 777px;
+  padding: 0;
+  background: #17212b;
+}
+
+.input input {
+  background: #17212b;
+  outline: none;
+  border: none;
+  width: 100%;
+  padding: 0;
+  font-size: 16px;
+  color: #6c7883;
+  line-height: 21px;
+}
+
+.input input::placeholder {
+  color: #6c7883;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+}
