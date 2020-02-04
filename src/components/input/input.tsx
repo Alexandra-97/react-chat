@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./input.module.css";
-import { AttachButton } from "../attachButton/attachButton";
-import { SendButton } from "../sendButton/sendButton";
+import { AttachButton } from "./attachButton/attachButton";
+import { SendButton } from "./sendButton/sendButton";
 
 export const Input: React.FC = props => {
   return (
