@@ -1,0 +1,27 @@
+.container {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .container {
+    display: none;
+    width: 0%;
+  }
+}
+
+.message {
+  color: #fff;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  display: block;
+  background-color: #242f3d;
+  width: 300px;
+  height: 25px;
+  text-align: center;
+  border-radius: 20px;
+  align-self: center;
+}

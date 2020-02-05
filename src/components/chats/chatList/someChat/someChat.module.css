@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  width: 100%;
+  height: 63px;
+  margin-top: 20px;
+  flex-direction: row;
+}
+
+.avatar {
+  min-width: 63px;
+  height: 63px;
+  background-color: blue;
+  border-radius: 90px;
+  margin-right: 33px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.userName {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  color: #ffffff;
+}
+
+.time {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  color: #6c7883;
+}
+
+.message {
+  margin-top: 14px;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  color: #6c7883;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}

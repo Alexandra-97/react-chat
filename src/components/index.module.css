@@ -1,0 +1,10 @@
+.wrapper {
+  background: #17212b;
+  min-height: 100vh;
+  min-width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  overflow: hidden;
+  margin: 0px auto;
+}
