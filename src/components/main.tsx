@@ -1,12 +1,12 @@
 import React from "react";
-import classes from "./index.module.css";
-import { Chats } from "./chats/chats";
+import classes from "./main.module.css";
 import { Dialog } from "./dialog/dialog";
+import { ChatsContainer } from "../containers/chatsContainer";
 
 export const Main: React.FC = props => {
   return (
     <div className={classes.wrapper}>
-      <Chats />
+      <ChatsContainer />
       <Dialog />
     </div>
   );

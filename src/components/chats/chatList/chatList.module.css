@@ -1,5 +1,4 @@
 .list {
   display: flex;
-  padding: 0px 14px;
   flex-direction: column;
 }

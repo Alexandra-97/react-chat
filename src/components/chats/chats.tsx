@@ -3,11 +3,16 @@ import classes from "./chats.module.css";
 import { Head } from "./head/head";
 import { ChatList } from "./chatList/chatList";
 
-export const Chats: React.FC = props => {
+interface IProps {
+  chats?: [];
+  openedChat?: number | null;
+}
+
+export function Chats({ chats, openedChat }: IProps) {
   return (
     <div className={classes.container}>
       <Head />
       <ChatList />
     </div>
   );
-};
+}
