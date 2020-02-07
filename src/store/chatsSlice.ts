@@ -19,9 +19,9 @@ export const { actions, reducer: chatsReducer } = chatsSlice;
 
 const { fetchChats } = actions;
 
-export function loadChats() {
+export function loadChats(currentUserId: number) {
   return async (dispatch: Dispatch) => {
-    const chats = await allChats().then(result => {
+    const chats = await allChats(currentUserId).then(result => {
       return result;
     });
     dispatch(fetchChats(chats));
