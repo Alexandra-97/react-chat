@@ -1,4 +1,4 @@
-export const users = [
+export const users: IUser[] = [
   {
     id: 1,
     name: "Leonid",
@@ -21,7 +21,26 @@ export const users = [
   }
 ];
 
-const chats = [
+interface IChat {
+  id: number;
+  users: number[];
+  messages: IMessage[];
+}
+
+interface IUser {
+  id: number;
+  name: string;
+  avatar: string;
+}
+
+interface IMessage {
+  senderId: number;
+  text: string;
+  date: string;
+  read: boolean;
+}
+
+const chats: IChat[] = [
   {
     id: 1,
     users: [0, 1],
@@ -130,10 +149,38 @@ async function allChats(currentUserId: number) {
   });
 }
 
+async function getDialog(currentUserId: number, dialogId: number) {
+  return emulateRequest().then(() => {
+    let neededChat: object = {};
+    let companion: object = {};
+    const resultDialog = chats.find(chat => {
+      return chat.id === dialogId;
+    });
+    if (resultDialog !== undefined) {
+      neededChat = {
+        ...neededChat,
+        id: resultDialog.id,
+        messages: resultDialog.messages
+      };
+      resultDialog.users.forEach(memberId => {
+        const resultUser = users.find(user => {
+          return user.id !== currentUserId && user.id === memberId;
+        });
+        if (resultUser !== undefined) {
+          companion = resultUser;
+        }
+      });
+      neededChat = { ...neededChat, companion };
+    }
+
+    return neededChat;
+  });
+}
+
 async function emulateRequest(timeout: number = 200) {
   return new Promise(resolve => {
     window.setTimeout(resolve, timeout);
   });
 }
 
-export { allChats };
+export { allChats, getDialog };
