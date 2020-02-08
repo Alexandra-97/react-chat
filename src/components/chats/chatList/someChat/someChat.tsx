@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import classes from "./someChat.module.css";
 import { UserContext } from "../../../main";
-import cn from "classnames";
+import classNames from "classnames";
 
 interface IProps {
   chat: {
@@ -19,7 +19,7 @@ interface IUser {
 }
 
 interface IMessage {
-  lastSender: number;
+  senderId: number;
   text: string;
   date: string;
   read: boolean;
@@ -29,6 +29,8 @@ export function SomeChat({ chat }: IProps) {
   const currentUser = useContext(UserContext);
   const date = new Date(chat.lastMessage.date);
   const time = `${date.getHours()}:${date.getMinutes()}`;
+
+  const myMessage = currentUser.id === chat.lastMessage.senderId;
 
   return (
     <div className={classes.wrapper}>
@@ -41,9 +43,37 @@ export function SomeChat({ chat }: IProps) {
         <div className={classes.content}>
           <div className={classes.header}>
             <div className={classes.userName}>{chat.companion.name}</div>
-            <div className={classes.time}>{time}</div>
+            <div className={classes.rightPart}>
+              <div
+                className={classNames({
+                  [classes.unread]: myMessage && chat.numberOfUnread > 0,
+                  [classes.read]: myMessage && chat.numberOfUnread === 0
+                })}
+              ></div>
+              <div className={classes.time}>{time}</div>
+            </div>
           </div>
-          <div className={classes.message}>{chat.lastMessage.text}</div>
+          <div className={classes.message}>
+            <span
+              className={classNames(classes.myMessage, {
+                [classes.unvisible]: !myMessage
+              })}
+            >
+              You: {""}
+            </span>
+            <div className={classes.wrap}>
+              {chat.lastMessage.text}
+              <div
+                className={classNames({
+                  [classes.numberOfUnread]:
+                    !myMessage && chat.numberOfUnread > 0,
+                  [classes.unvisible]: myMessage || chat.numberOfUnread === 0
+                })}
+              >
+                {chat.numberOfUnread}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
