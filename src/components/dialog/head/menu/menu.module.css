@@ -1,0 +1,90 @@
+.menuWrap {
+  min-height: 48px;
+  min-width: 48px;
+  border-radius: 90px;
+  background-color: #242f3d;
+  margin: 6px 12px 6px 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  min-width: 6px;
+  min-height: 24px;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  margin: 20px 33px 20px 0;
+}
+
+.menu::before,
+.menu::after {
+  content: "";
+  background-color: #6c7883;
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 90px;
+  left: 0;
+}
+
+.menu::before {
+  top: 0;
+}
+
+.menu::after {
+  bottom: 0;
+}
+
+.menu span {
+  background-color: #6c7883;
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 90px;
+  left: 0;
+  top: 9px;
+}
+
+.menu:hover span,
+.menu:hover::before,
+.menu:hover::after {
+  background-color: #fff;
+}
+
+/* .menu:hover {
+  min-height: 48px;
+  min-width: 48px;
+  border-radius: 90px;
+  background-color: #242f3d;
+  margin: 6px 12px 6px 0;
+} */
+
+.menu:active ~ .menuList,
+.menu:focus ~ .menuList {
+  display: block;
+}
+
+.menuList {
+  position: absolute;
+  right: 24px;
+  top: 40px;
+  list-style: none;
+  min-width: 160px;
+  min-height: 126px;
+  background-color: #17212b;
+  padding: 10px 0px 0px 10px;
+  display: none;
+}
+
+.menuList li {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  color: #ffffff;
+  margin-bottom: 8px;
+  cursor: pointer;
+}

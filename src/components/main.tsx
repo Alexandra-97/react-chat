@@ -1,12 +1,12 @@
 import React, { createContext } from "react";
 import classes from "./main.module.css";
-import { Dialog } from "./dialog/dialog";
 import { ChatsContainer } from "../containers/chatsContainer";
 import {
   useSelector as useReduxSelector,
   TypedUseSelectorHook
 } from "react-redux";
 import { RootState } from "../store/rootReducer";
+import { DialogContainer } from "../containers/dialogContainer";
 
 interface IUser {
   id: number;
@@ -24,7 +24,7 @@ export const Main: React.FC = props => {
     <div className={classes.wrapper}>
       <UserContext.Provider value={currentUser}>
         <ChatsContainer />
-        <Dialog />
+        <DialogContainer />
       </UserContext.Provider>
     </div>
   );

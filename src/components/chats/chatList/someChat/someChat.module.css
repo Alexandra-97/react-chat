@@ -1,17 +1,7 @@
-.wrapper {
-  width: 100%;
-  padding: 10px 14px;
-}
-
 .container {
   display: flex;
   height: 63px;
   flex-direction: row;
-}
-
-.wrapper:hover {
-  background-color: #242f3d;
-  cursor: pointer;
 }
 
 .avatar {

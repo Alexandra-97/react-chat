@@ -32,3 +32,9 @@
   left: 0;
   top: 6px;
 }
+
+.burger:hover span,
+.burger:hover::before,
+.burger:hover::after {
+  background-color: #fff;
+}

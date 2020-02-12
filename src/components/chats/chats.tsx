@@ -6,13 +6,14 @@ import { ChatList } from "./chatList/chatList";
 interface IProps {
   chats?: [];
   openedChat?: number | null;
+  setId(id: number): void;
 }
 
-export function Chats({ chats, openedChat }: IProps) {
+export function Chats({ setId }: IProps) {
   return (
     <div className={classes.container}>
       <Head />
-      <ChatList />
+      <ChatList setId={setId} />
     </div>
   );
 }

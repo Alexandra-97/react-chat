@@ -4,20 +4,21 @@ import { allChats } from "../api/Api";
 
 const initialState = {
   chats: [],
-  openedChat: null
+  openedChat: 0
 };
 
 const chatsSlice = createSlice({
   name: "chats",
   initialState,
   reducers: {
-    fetchChats: (state, action) => ({ ...state, chats: action.payload })
+    fetchChats: (state, action) => ({ ...state, chats: action.payload }),
+    setChatId: (state, action) => ({ ...state, openedChat: action.payload })
   }
 });
 
 export const { actions, reducer: chatsReducer } = chatsSlice;
 
-const { fetchChats } = actions;
+const { fetchChats, setChatId } = actions;
 
 export function loadChats(currentUserId: number) {
   return async (dispatch: Dispatch) => {
@@ -25,5 +26,11 @@ export function loadChats(currentUserId: number) {
       return result;
     });
     dispatch(fetchChats(chats));
+  };
+}
+
+export function setDialogId(dialogId: number) {
+  return async (dispatch: Dispatch) => {
+    dispatch(setChatId(dialogId));
   };
 }

@@ -1,21 +1,21 @@
 export const users: IUser[] = [
   {
-    id: 1,
+    id: 2,
     name: "Leonid",
     avatar: "avatars/Leonid.jpg"
   },
   {
-    id: 2,
+    id: 3,
     name: "Scream Smith",
     avatar: "avatars/Scream.jpg"
   },
   {
-    id: 3,
+    id: 4,
     name: "Franz Kafka",
     avatar: "avatars/Franz.jpg"
   },
   {
-    id: 4,
+    id: 5,
     name: "Gregor Zamza",
     avatar: "avatars/Gregor.jpg"
   }
@@ -43,34 +43,47 @@ interface IMessage {
 const chats: IChat[] = [
   {
     id: 1,
-    users: [0, 1],
+    users: [1, 2],
     messages: [
       {
-        senderId: 1,
+        senderId: 2,
         text: "Придёшь сегодня на игру?",
         date: "2019-12-11T13:55:50.417",
         read: true
+      },
+      {
+        senderId: 1,
+        text:
+          "Та неампир тоьлорпас проьлрпавапррррр рррррррррр рррррррррррррр ррррррррр ррррррр рррррррррр рррррр рррррррррррррр рррррррррр рррррррр рррррррр рррррррр ррррррр рррррррр рррррр",
+        date: "2019-12-11T13:56:50.417",
+        read: true
+      },
+      {
+        senderId: 2,
+        text: "А чё?",
+        date: "2019-12-11T13:57:50.417",
+        read: false
       }
     ]
   },
   {
     id: 2,
-    users: [0, 2],
+    users: [1, 3],
     messages: [
       {
-        senderId: 2,
+        senderId: 3,
         text: "Hi",
         date: "2019-12-11T13:51:50.417",
         read: false
       },
       {
-        senderId: 2,
+        senderId: 3,
         text: "Are you here?",
         date: "2019-12-11T13:52:50.417",
         read: false
       },
       {
-        senderId: 2,
+        senderId: 3,
         text: "DAMN! Are you ok? I promise",
         date: "2019-12-11T13:53:50.417",
         read: false
@@ -79,10 +92,10 @@ const chats: IChat[] = [
   },
   {
     id: 3,
-    users: [0, 3],
+    users: [1, 4],
     messages: [
       {
-        senderId: 0,
+        senderId: 1,
         text: "I am already done with those",
         date: "2019-12-11T13:49:50.417",
         read: false
@@ -91,10 +104,10 @@ const chats: IChat[] = [
   },
   {
     id: 4,
-    users: [0, 4],
+    users: [1, 5],
     messages: [
       {
-        senderId: 4,
+        senderId: 5,
         text: "How are you, body?",
         date: "2019-12-11T13:40:50.417",
         read: true

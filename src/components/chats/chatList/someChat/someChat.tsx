@@ -33,45 +33,42 @@ export function SomeChat({ chat }: IProps) {
   const myMessage = currentUser.id === chat.lastMessage.senderId;
 
   return (
-    <div className={classes.wrapper}>
-      <div className={classes.container}>
-        <img
-          className={classes.avatar}
-          src={chat.companion.avatar}
-          alt={chat.companion.name}
-        ></img>
-        <div className={classes.content}>
-          <div className={classes.header}>
-            <div className={classes.userName}>{chat.companion.name}</div>
-            <div className={classes.rightPart}>
-              <div
-                className={classNames({
-                  [classes.unread]: myMessage && chat.numberOfUnread > 0,
-                  [classes.read]: myMessage && chat.numberOfUnread === 0
-                })}
-              ></div>
-              <div className={classes.time}>{time}</div>
-            </div>
+    <div className={classes.container}>
+      <img
+        className={classes.avatar}
+        src={chat.companion.avatar}
+        alt={chat.companion.name}
+      ></img>
+      <div className={classes.content}>
+        <div className={classes.header}>
+          <div className={classes.userName}>{chat.companion.name}</div>
+          <div className={classes.rightPart}>
+            <div
+              className={classNames({
+                [classes.unread]: myMessage && chat.numberOfUnread > 0,
+                [classes.read]: myMessage && chat.numberOfUnread === 0
+              })}
+            ></div>
+            <div className={classes.time}>{time}</div>
           </div>
-          <div className={classes.message}>
-            <span
-              className={classNames(classes.myMessage, {
-                [classes.unvisible]: !myMessage
+        </div>
+        <div className={classes.message}>
+          <span
+            className={classNames(classes.myMessage, {
+              [classes.unvisible]: !myMessage
+            })}
+          >
+            You: {""}
+          </span>
+          <div className={classes.wrap}>
+            {chat.lastMessage.text}
+            <div
+              className={classNames({
+                [classes.numberOfUnread]: !myMessage && chat.numberOfUnread > 0,
+                [classes.unvisible]: myMessage || chat.numberOfUnread === 0
               })}
             >
-              You: {""}
-            </span>
-            <div className={classes.wrap}>
-              {chat.lastMessage.text}
-              <div
-                className={classNames({
-                  [classes.numberOfUnread]:
-                    !myMessage && chat.numberOfUnread > 0,
-                  [classes.unvisible]: myMessage || chat.numberOfUnread === 0
-                })}
-              >
-                {chat.numberOfUnread}
-              </div>
+              {chat.numberOfUnread}
             </div>
           </div>
         </div>
