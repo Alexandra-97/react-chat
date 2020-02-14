@@ -14,6 +14,38 @@
   margin-top: 10px;
 }
 
-.menu {
-  background-image: url(../../../images/icon-menu.svg);
+.arrow {
+  display: none;
+}
+
+.avatar {
+  display: none;
+}
+
+.leftPart {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .userName {
+    margin-left: 0;
+  }
+  .arrow {
+    display: block;
+    min-width: 18px;
+    min-height: 16px;
+    background: url(../../../images/arrow.svg) center no-repeat;
+    margin: 0 15px 0 17px;
+  }
+  .avatar {
+    align-self: center;
+    display: block;
+    width: 48px;
+    height: 48px;
+    max-width: 48px;
+    max-width: 48px;
+    background-color: blue;
+    border-radius: 90px;
+    margin-right: 12px;
+  }
 }

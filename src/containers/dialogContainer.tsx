@@ -8,6 +8,7 @@ import { RootState } from "../store/rootReducer";
 import { loadDialog } from "../store/dialogSlice";
 import { UserContext } from "../components/main";
 import { Dialog } from "../components/dialog/dialog";
+import { setDialogId } from "../store/chatsSlice";
 
 export const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
 
@@ -17,11 +18,15 @@ export function DialogContainer() {
   const currentUser = useContext(UserContext);
   const dispatch = useDispatch();
 
+  function setId(id: number): void {
+    dispatch(setDialogId(id));
+  }
+
   useEffect(() => {
     if (openedChat !== null) {
       dispatch(loadDialog(currentUser.id, openedChat));
     }
   }, [dispatch, openedChat, currentUser.id]);
 
-  return <Dialog dialog={dialog} />;
+  return <Dialog dialog={dialog} setId={setId} />;
 }

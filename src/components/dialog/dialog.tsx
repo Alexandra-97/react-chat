@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "./dialog.module.css";
 import { Input } from "./input/input";
 import { Head } from "./head/head";
 import { Content } from "./content/content";
+import { ActiveDialogContext } from "../main";
+import classNames from "classnames";
 
 interface IProps {
   dialog?: IDialog;
+  setId(id: number): void;
 }
 
 interface IDialog {
@@ -27,12 +30,18 @@ interface ICompanion {
   avatar: string;
 }
 
-export function Dialog({ dialog }: IProps) {
+export function Dialog({ dialog, setId }: IProps) {
+  const openedChat = useContext(ActiveDialogContext);
+
   return (
-    <div className={classes.container}>
+    <div
+      className={classNames(classes.container, {
+        [classes.display]: openedChat !== 0
+      })}
+    >
       {dialog !== undefined && dialog.id !== undefined ? (
         <>
-          <Head companion={dialog.companion} />
+          <Head companion={dialog.companion} setId={setId} />
           <Content messages={dialog.messages} />
           <Input />
         </>

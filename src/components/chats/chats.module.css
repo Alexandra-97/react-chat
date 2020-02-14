@@ -9,4 +9,7 @@
   .container {
     max-width: none;
   }
+  .hide {
+    display: none;
+  }
 }
