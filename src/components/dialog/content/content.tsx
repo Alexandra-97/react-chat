@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import classes from "./content.module.css";
-import { UserContext } from "../../main";
-import classNames from "classnames";
+import { Message } from "./message/message";
+import { DateField } from "./date/date";
 
 interface IProps {
   messages: IMessage[];
@@ -15,39 +15,24 @@ interface IMessage {
 }
 
 export function Content({ messages }: IProps) {
-  const currentUser = useContext(UserContext);
+  const reverseMessages = messages.concat().reverse();
 
   return (
     <div className={classes.content}>
-      {messages.map((message, index) => {
-        const date = new Date(message.date);
-        const time = `${date.getHours()}:${date.getMinutes()}`;
+      {reverseMessages.map((message, index) => {
+        const triangle =
+          !reverseMessages[index - 1] ||
+          reverseMessages[index - 1].senderId !== message.senderId;
 
         return (
-          <div key={`${index}+${message}`}>
-            <div
-              className={classNames(classes.messageWrap, {
-                [classes.myMessageWrap]: currentUser.id === message.senderId
-              })}
-            >
-              <div className={classes.message}>{message.text}</div>
-              <div
-                className={classNames(classes.time, {
-                  [classes.myTime]: currentUser.id === message.senderId
-                })}
-              >
-                {time}
-              </div>
-              <div
-                className={classNames({
-                  [classes.unread]:
-                    currentUser.id === message.senderId && !message.read,
-                  [classes.read]:
-                    currentUser.id === message.senderId && message.read
-                })}
-              />
-            </div>
-          </div>
+          <React.Fragment key={`${index}+${message}`}>
+            <Message message={message} triangle={triangle} />
+            {!reverseMessages[index + 1] ||
+            new Date(reverseMessages[index + 1].date).toLocaleDateString() !==
+              new Date(message.date).toLocaleDateString() ? (
+              <DateField date={message.date} />
+            ) : null}
+          </React.Fragment>
         );
       })}
     </div>

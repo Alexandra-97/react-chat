@@ -48,20 +48,37 @@ const chats: IChat[] = [
       {
         senderId: 2,
         text: "Придёшь сегодня на игру?",
-        date: "2019-12-11T13:55:50.417",
+        date: "2019-09-11T13:54:50.417",
+        read: true
+      },
+      {
+        senderId: 2,
+        text: "Придёшь сегодня на игру?",
+        date: "2019-09-11T13:55:50.417",
         read: true
       },
       {
         senderId: 1,
-        text:
-          "Та неампир тоьлорпас проьлрпавапррррр рррррррррр рррррррррррррр ррррррррр ррррррр рррррррррр рррррр рррррррррррррр рррррррррр рррррррр рррррррр рррррррр ррррррр рррррррр рррррр",
-        date: "2019-12-11T13:56:50.417",
+        text: "Та не.",
+        date: "2019-12-12T13:55:50.417",
+        read: true
+      },
+      {
+        senderId: 1,
+        text: "Та не.",
+        date: "2019-12-12T13:56:50.417",
+        read: true
+      },
+      {
+        senderId: 1,
+        text: "Та не.",
+        date: "2019-12-13T13:56:50.417",
         read: true
       },
       {
         senderId: 2,
         text: "А чё?",
-        date: "2019-12-11T13:57:50.417",
+        date: "2020-12-13T13:57:50.417",
         read: false
       }
     ]
@@ -73,13 +90,13 @@ const chats: IChat[] = [
       {
         senderId: 3,
         text: "Hi",
-        date: "2019-12-11T13:51:50.417",
+        date: "2017-12-11T13:51:50.417",
         read: false
       },
       {
         senderId: 3,
         text: "Are you here?",
-        date: "2019-12-11T13:52:50.417",
+        date: "2018-12-11T13:52:50.417",
         read: false
       },
       {
@@ -109,7 +126,7 @@ const chats: IChat[] = [
       {
         senderId: 5,
         text: "How are you, body?",
-        date: "2019-12-11T13:40:50.417",
+        date: "2019-09-11T13:40:50.417",
         read: true
       }
     ]
@@ -190,7 +207,7 @@ async function getDialog(currentUserId: number, dialogId: number) {
   });
 }
 
-async function emulateRequest(timeout: number = 200) {
+async function emulateRequest(timeout: number = 0) {
   return new Promise(resolve => {
     window.setTimeout(resolve, timeout);
   });

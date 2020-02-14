@@ -1,0 +1,14 @@
+.date {
+  display: block;
+  align-self: center;
+  margin-bottom: 20px;
+  min-height: 20px;
+  min-width: 160px;
+  background: #242f3d;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  color: #ffffff;
+}

@@ -1,0 +1,98 @@
+.messageWrap {
+  max-width: 540px;
+  width: auto;
+  margin: 0px 50px 20px 24px;
+  background-color: #17212b;
+  border-radius: 4px;
+  display: inline-flex;
+  flex-direction: row;
+}
+
+.message {
+  word-break: break-word;
+  margin: 10px 24px;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  color: #ffffff;
+}
+
+.time {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  color: #6c7883;
+  align-self: flex-end;
+  margin: 0px 8px 6px 0px;
+}
+
+.myTime {
+  color: #72bcfd;
+}
+
+.myMessageWrap {
+  float: right;
+  background-color: #4082bc;
+  margin: 0px 24px 20px 50px;
+}
+
+.unread {
+  background: url(../../../../images/icon-sended.svg) center no-repeat;
+  min-width: 16px;
+  min-height: 16px;
+  margin-right: 4px;
+  align-self: flex-end;
+  margin: 0px 8px 10px 0px;
+}
+
+.read {
+  background: url(../../../../images/icon-read.svg) center no-repeat;
+  min-width: 22px;
+  min-height: 16px;
+  margin-right: 4px;
+  align-self: flex-end;
+  margin: 0px 8px 10px 0px;
+}
+
+.myLastMessage {
+  border-radius: 4px 4px 0px 4px;
+}
+
+.myLastMessage > :last-child {
+  margin-right: 0px;
+}
+
+.myLastMessage::after {
+  display: inline-block;
+  position: relative;
+  content: "";
+  width: 0;
+  height: inherit;
+  border-bottom: 8px solid #4082bc;
+  border-right: 8px solid transparent;
+  left: 8px;
+}
+
+.lastMessage {
+  border-radius: 4px 4px 4px 0px;
+}
+
+.lastMessage > :first-child {
+  margin-left: 16px;
+}
+
+.lastMessage::before {
+  display: block;
+  position: relative;
+  content: "";
+  width: 0;
+  height: inherit;
+  border-bottom: 8px solid #17212b;
+  border-left: 8px solid transparent;
+  text-align: left;
+  right: 8px;
+}
+
+.series {
+  margin-bottom: 10px;
+}
