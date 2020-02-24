@@ -40,7 +40,7 @@ interface IMessage {
   read: boolean;
 }
 
-const chats: IChat[] = [
+let chats: IChat[] = [
   {
     id: 1,
     users: [1, 2],
@@ -133,6 +133,17 @@ const chats: IChat[] = [
   }
 ];
 
+const texts = [
+  "Привет!",
+  "Как дела?",
+  "Что нового?",
+  "Ответь срочно!",
+  "Да.",
+  "Нет.",
+  "Погода плохая",
+  "Я с тобой больше не разговариваю"
+];
+
 async function allChats(currentUserId: number) {
   return emulateRequest().then(() => {
     const neededChats: object[] = [];
@@ -207,10 +218,42 @@ async function getDialog(currentUserId: number, dialogId: number) {
   });
 }
 
+function generateMessage() {
+  const message: IMessage = {
+    senderId: users[Math.floor(Math.random() * users.length)].id,
+    read: false,
+    text: texts[Math.floor(Math.random() * texts.length)],
+    date: new Date().toISOString()
+  };
+
+  return message;
+}
+
+function randomInteger(min: number, max: number) {
+  const rand = min + Math.random() * (max + 1 - min);
+
+  return Math.floor(rand);
+}
+
+async function addMessage(currentUserId: number) {
+  return emulateRequest(randomInteger(0, 1000)).then(() => {
+    const message = generateMessage();
+    const chatId = chats.findIndex(chat => {
+      return (
+        chat.users.some(user => user === message.senderId) &&
+        chat.users.some(user => user === currentUserId)
+      );
+    });
+    if (chatId !== -1) {
+      chats[chatId].messages.push(message);
+    }
+  });
+}
+
 async function emulateRequest(timeout: number = 0) {
   return new Promise(resolve => {
     window.setTimeout(resolve, timeout);
   });
 }
 
-export { allChats, getDialog };
+export { allChats, getDialog, addMessage };
