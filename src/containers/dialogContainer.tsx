@@ -26,7 +26,7 @@ export function DialogContainer() {
     if (openedChat !== null) {
       dispatch(loadDialog(currentUser.id, openedChat));
     }
-  }, [dispatch, openedChat, currentUser.id]);
+  }, [dispatch, openedChat, currentUser.id, dialog]);
 
   return <Dialog dialog={dialog} setId={setId} />;
 }

@@ -6,7 +6,7 @@ import {
 } from "react-redux";
 import { RootState } from "../store/rootReducer";
 import { Chats } from "../components/chats/chats";
-import { loadChats } from "../store/chatsSlice";
+import { loadChats, generateMessages } from "../store/chatsSlice";
 import { UserContext } from "../components/main";
 import { setDialogId } from "../store/chatsSlice";
 
@@ -45,6 +45,10 @@ export function ChatsContainer() {
 
   useEffect(() => {
     dispatch(loadChats(currentUser.id));
+  }, [dispatch, currentUser.id, chats]);
+
+  useEffect(() => {
+    dispatch(generateMessages(currentUser.id));
   }, [dispatch, currentUser.id]);
 
   return (

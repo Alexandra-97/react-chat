@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Dispatch } from "redux";
-import { allChats } from "../api/Api";
+import { allChats, addMessage } from "../api/Api";
 
 const initialState = {
   chats: [],
@@ -22,6 +22,16 @@ const { fetchChats, setChatId } = actions;
 
 export function loadChats(currentUserId: number) {
   return async (dispatch: Dispatch) => {
+    const chats = await allChats(currentUserId).then(result => {
+      return result;
+    });
+    dispatch(fetchChats(chats));
+  };
+}
+
+export function generateMessages(currentUserId: number) {
+  return async (dispatch: Dispatch) => {
+    await addMessage(currentUserId);
     const chats = await allChats(currentUserId).then(result => {
       return result;
     });

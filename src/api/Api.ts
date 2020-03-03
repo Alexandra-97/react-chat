@@ -236,7 +236,8 @@ function randomInteger(min: number, max: number) {
 }
 
 async function addMessage(currentUserId: number) {
-  return emulateRequest(randomInteger(0, 1000)).then(() => {
+  let delay = 1000;
+  let timerId = setTimeout(function add() {
     const message = generateMessage();
     const chatId = chats.findIndex(chat => {
       return (
@@ -245,9 +246,13 @@ async function addMessage(currentUserId: number) {
       );
     });
     if (chatId !== -1) {
-      chats[chatId].messages.push(message);
+      const messages = [...chats[chatId].messages];
+      messages.push(message);
+      chats[chatId].messages = messages;
     }
-  });
+    delay = randomInteger(2000, 20000);
+    timerId = setTimeout(add, delay);
+  }, delay);
 }
 
 async function emulateRequest(timeout: number = 0) {

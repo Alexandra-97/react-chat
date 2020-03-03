@@ -23,7 +23,6 @@ interface ICompanion {
 
 const initialState = {
   dialog: {} as IDialog
-  //openedChat: null
 };
 
 const dialogSlice = createSlice({
