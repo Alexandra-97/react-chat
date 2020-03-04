@@ -40,7 +40,7 @@ interface IMessage {
   read: boolean;
 }
 
-let chats: IChat[] = [
+const chats: IChat[] = [
   {
     id: 1,
     users: [1, 2],
@@ -160,7 +160,7 @@ async function allChats(currentUserId: number) {
           let i = 0;
           let f = 0;
           while (i < messages.length && f === 0) {
-            if (!messages[i].read) {
+            if (!messages[i].read && messages[i].senderId !== currentUserId) {
               numberOfUnread++;
             } else {
               f = 1;
@@ -229,31 +229,24 @@ function generateMessage() {
   return message;
 }
 
-function randomInteger(min: number, max: number) {
-  const rand = min + Math.random() * (max + 1 - min);
-
-  return Math.floor(rand);
-}
-
 async function addMessage(currentUserId: number) {
-  let delay = 1000;
-  let timerId = setTimeout(function add() {
-    const message = generateMessage();
-    const chatId = chats.findIndex(chat => {
-      return (
-        chat.users.some(user => user === message.senderId) &&
-        chat.users.some(user => user === currentUserId)
-      );
-    });
-    if (chatId !== -1) {
-      const messages = [...chats[chatId].messages];
-      messages.push(message);
-      chats[chatId].messages = messages;
-    }
-    delay = randomInteger(2000, 20000);
-    timerId = setTimeout(add, delay);
-  }, delay);
+  const message = generateMessage();
+  const chatId = chats.findIndex(chat => {
+    return (
+      chat.users.some(user => user === message.senderId) &&
+      chat.users.some(user => user === currentUserId)
+    );
+  });
+  if (chatId !== -1) {
+    const messages = [...chats[chatId].messages];
+    messages.push(message);
+    chats[chatId].messages = messages;
+  }
+
+  return `${chats[chatId].id},${chats[chatId].messages.length}`;
 }
+
+async function sendMessage() {}
 
 async function emulateRequest(timeout: number = 0) {
   return new Promise(resolve => {
@@ -261,4 +254,4 @@ async function emulateRequest(timeout: number = 0) {
   });
 }
 
-export { allChats, getDialog, addMessage };
+export { allChats, getDialog, addMessage, sendMessage };

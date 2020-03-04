@@ -28,7 +28,10 @@ interface IMessage {
 export function SomeChat({ chat }: IProps) {
   const currentUser = useContext(UserContext);
   const date = new Date(chat.lastMessage.date);
-  const time = `${date.getHours()}:${date.getMinutes()}`;
+  const time = `${date.getHours()}:${String(date.getMinutes()).padStart(
+    2,
+    "0"
+  )}`;
 
   const myMessage = currentUser.id === chat.lastMessage.senderId;
 
@@ -45,8 +48,8 @@ export function SomeChat({ chat }: IProps) {
           <div className={classes.rightPart}>
             <div
               className={classNames({
-                [classes.unread]: myMessage && chat.numberOfUnread > 0,
-                [classes.read]: myMessage && chat.numberOfUnread === 0
+                [classes.unread]: myMessage && !chat.lastMessage.read,
+                [classes.read]: myMessage && chat.lastMessage.read
               })}
             ></div>
             <div className={classes.time}>{time}</div>

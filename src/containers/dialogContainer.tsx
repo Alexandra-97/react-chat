@@ -14,6 +14,7 @@ export const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
 
 export function DialogContainer() {
   const openedChat = useSelector(state => state.chats.openedChat);
+  const changeInfo: string = useSelector(state => state.chats.changeInfo);
   const dialog = useSelector(state => state.dialog.dialog);
   const currentUser = useContext(UserContext);
   const dispatch = useDispatch();
@@ -23,10 +24,16 @@ export function DialogContainer() {
   }
 
   useEffect(() => {
-    if (openedChat !== null) {
+    if (openedChat !== 0) {
       dispatch(loadDialog(currentUser.id, openedChat));
     }
-  }, [dispatch, openedChat, currentUser.id, dialog]);
+  }, [dispatch, openedChat, currentUser.id]);
+
+  useEffect(() => {
+    if (openedChat === Number(changeInfo.split(",")[0])) {
+      dispatch(loadDialog(currentUser.id, openedChat));
+    }
+  }, [dispatch, openedChat, currentUser.id, changeInfo]);
 
   return <Dialog dialog={dialog} setId={setId} />;
 }

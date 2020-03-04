@@ -38,6 +38,8 @@ export const { actions, reducer: dialogReducer } = dialogSlice;
 const { fetchDialog } = actions;
 
 export function loadDialog(currentUserId: number, dialogId: number) {
+  console.log("dfgh");
+
   return async (dispatch: Dispatch) => {
     const dialog = await getDialog(currentUserId, dialogId).then(result => {
       return result;

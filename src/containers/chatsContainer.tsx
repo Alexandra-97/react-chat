@@ -45,11 +45,20 @@ export function ChatsContainer() {
 
   useEffect(() => {
     dispatch(loadChats(currentUser.id));
-  }, [dispatch, currentUser.id, chats]);
+  }, [dispatch, currentUser.id]);
 
   useEffect(() => {
-    dispatch(generateMessages(currentUser.id));
+    setInterval(
+      () => dispatch(generateMessages(currentUser.id)),
+      randomInteger(1000, 20000)
+    );
   }, [dispatch, currentUser.id]);
+
+  function randomInteger(min: number, max: number) {
+    const rand = min + Math.random() * (max + 1 - min);
+
+    return Math.floor(rand);
+  }
 
   return (
     <ChatsContext.Provider value={chats}>
