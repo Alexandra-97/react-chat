@@ -246,7 +246,30 @@ async function addMessage(currentUserId: number) {
   return `${chats[chatId].id},${chats[chatId].messages.length}`;
 }
 
-async function sendMessage() {}
+async function sendMessages(
+  currentUserId: number,
+  openedChat: number,
+  text: string
+) {
+  return emulateRequest().then(() => {
+    const message: IMessage = {
+      senderId: currentUserId,
+      read: false,
+      text,
+      date: new Date().toISOString()
+    };
+    const chatId = chats.findIndex(chat => {
+      return chat.id === openedChat;
+    });
+    if (chatId !== -1) {
+      const messages = [...chats[chatId].messages];
+      messages.push(message);
+      chats[chatId].messages = messages;
+    }
+
+    return `${message.date}`;
+  });
+}
 
 async function emulateRequest(timeout: number = 0) {
   return new Promise(resolve => {
@@ -254,4 +277,4 @@ async function emulateRequest(timeout: number = 0) {
   });
 }
 
-export { allChats, getDialog, addMessage, sendMessage };
+export { allChats, getDialog, addMessage, sendMessages };

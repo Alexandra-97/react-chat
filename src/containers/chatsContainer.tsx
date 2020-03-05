@@ -35,7 +35,7 @@ export const ChatsContext = createContext<IChat[]>([]);
 
 export function ChatsContainer() {
   const chats = useSelector(state => state.chats.chats);
-  //const openedChat = useSelector(state => state.chats.openedChat);
+  const changeInfo = useSelector(state => state.dialog.changeInfo);
   const currentUser = useContext(UserContext);
   const dispatch = useDispatch();
 
@@ -45,7 +45,7 @@ export function ChatsContainer() {
 
   useEffect(() => {
     dispatch(loadChats(currentUser.id));
-  }, [dispatch, currentUser.id]);
+  }, [dispatch, currentUser.id, changeInfo]);
 
   useEffect(() => {
     setInterval(

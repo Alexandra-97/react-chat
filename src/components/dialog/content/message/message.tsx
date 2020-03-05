@@ -19,7 +19,10 @@ export const Message: React.FC<IProps> = ({ message, triangle }) => {
   const currentUser = useContext(UserContext);
   const myMessage = currentUser.id === message.senderId;
   const date = new Date(message.date);
-  const time = `${date.getHours()}:${date.getMinutes()}`;
+  const time = `${date.getHours()}:${String(date.getMinutes()).padStart(
+    2,
+    "0"
+  )}`;
 
   return (
     <div>

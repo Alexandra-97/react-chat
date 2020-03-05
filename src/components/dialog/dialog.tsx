@@ -9,6 +9,8 @@ import classNames from "classnames";
 interface IProps {
   dialog?: IDialog;
   setId(id: number): void;
+  onTypeMessage(e: React.ChangeEvent<HTMLInputElement>): void;
+  value: string;
 }
 
 interface IDialog {
@@ -30,7 +32,7 @@ interface ICompanion {
   avatar: string;
 }
 
-export function Dialog({ dialog, setId }: IProps) {
+export function Dialog({ dialog, setId, onTypeMessage, value }: IProps) {
   const openedChat = useContext(ActiveDialogContext);
 
   return (
@@ -43,7 +45,7 @@ export function Dialog({ dialog, setId }: IProps) {
         <>
           <Head companion={dialog.companion} setId={setId} />
           <Content messages={dialog.messages} />
-          <Input />
+          <Input onTypeMessage={onTypeMessage} value={value} />
         </>
       ) : (
         <div className={classes.message}>Выберите, кому хотели бы написать</div>

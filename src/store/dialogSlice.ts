@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Dispatch } from "redux";
-import { getDialog } from "../api/Api";
+import { getDialog, sendMessages } from "../api/Api";
 
 interface IDialog {
   id: number;
@@ -22,28 +22,47 @@ interface ICompanion {
 }
 
 const initialState = {
-  dialog: {} as IDialog
+  dialog: {} as IDialog,
+  changeInfo: ""
 };
 
 const dialogSlice = createSlice({
   name: "dialog",
   initialState,
   reducers: {
-    fetchDialog: (state, action) => ({ ...state, dialog: action.payload })
+    fetchDialog: (state, action) => ({ ...state, dialog: action.payload }),
+    setChangeInfo: (state, action) => ({ ...state, changeInfo: action.payload })
   }
 });
 
 export const { actions, reducer: dialogReducer } = dialogSlice;
 
-const { fetchDialog } = actions;
+const { fetchDialog, setChangeInfo } = actions;
 
 export function loadDialog(currentUserId: number, dialogId: number) {
-  console.log("dfgh");
-
   return async (dispatch: Dispatch) => {
     const dialog = await getDialog(currentUserId, dialogId).then(result => {
       return result;
     });
     dispatch(fetchDialog(dialog));
+  };
+}
+
+export function sendMessage(
+  currentUserId: number,
+  openedChat: number,
+  text: string
+) {
+  return async (dispatch: Dispatch) => {
+    const answer = await sendMessages(currentUserId, openedChat, text).then(
+      result => {
+        return result;
+      }
+    );
+    const dialog = await getDialog(currentUserId, openedChat).then(result => {
+      return result;
+    });
+    dispatch(fetchDialog(dialog));
+    dispatch(setChangeInfo(answer));
   };
 }
