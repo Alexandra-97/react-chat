@@ -27,6 +27,13 @@ interface IChat {
   messages: IMessage[];
 }
 
+interface INeededChat {
+  id: number;
+  numberOfUnread: number;
+  lastMessage: IMessage;
+  companion: IUser;
+}
+
 interface IUser {
   id: number;
   name: string;
@@ -78,7 +85,7 @@ const chats: IChat[] = [
       {
         senderId: 2,
         text: "А чё?",
-        date: "2020-12-13T13:57:50.417",
+        date: "2020-01-13T13:57:50.417",
         read: false
       }
     ]
@@ -146,11 +153,11 @@ const texts = [
 
 async function allChats(currentUserId: number) {
   return emulateRequest().then(() => {
-    const neededChats: object[] = [];
-    let neededChat: object = {};
+    const neededChats: INeededChat[] = [];
+    let neededChat: INeededChat = {} as INeededChat;
     chats.forEach(chat => {
-      let companion: object = {};
-      let lastMessage: object = {};
+      let companion: IUser = {} as IUser;
+      let lastMessage: IMessage = {} as IMessage;
       let numberOfUnread: number = 0;
       if (chat.users.includes(currentUserId)) {
         neededChat = { ...neededChat, id: chat.id };
@@ -184,6 +191,16 @@ async function allChats(currentUserId: number) {
         });
         neededChats.push(neededChat);
       }
+    });
+    neededChats.sort((a, b): number => {
+      if (new Date(a.lastMessage.date) < new Date(b.lastMessage.date)) {
+        return 1;
+      }
+      if (new Date(a.lastMessage.date) > new Date(b.lastMessage.date)) {
+        return -1;
+      }
+
+      return 0;
     });
 
     return neededChats;
